@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <title>Непрерывная олимпиада</title>
+    </head>
+    <body>
+        <div class="page-header">
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'logout'%}?next={{request.path}}" class="top-menu"><span class="glyphicon glyphicon-log-out"/></a>
+            <div class="top-menu"><span>{{ user.get_username }}</span></div>
+           {% else %}
+           <a href="{% url 'login'%}?next={{request.path}}" class="top-menu"><span class="glyphicon glyphicon-log-in"/></a>
+           {% endif %}
+            <h1><a href="/">Непрерывная олимпиада</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
